@@ -1,0 +1,12 @@
+password
+123456
+add
+more
+passwords
+one
+per
+line
+or
+use
+some
+wordlist
